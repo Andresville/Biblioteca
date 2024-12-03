@@ -5,24 +5,24 @@ import axios from 'axios';
 const Admin = () => {
   const [libros, setLibros] = useState([]);
   const [estados, setEstados] = useState([]);
-  const [editoriales, setEditoriales] = useState([]);
+  const [editorial, setEditorial] = useState([]);
   const [idiomas, setIdiomas] = useState([]);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
-  // Obtener libros, estados, editoriales, idiomas desde el backend
+  // Cargar los datos desde el backend
   useEffect(() => {
     const fetchData = async () => {
       try {
         const librosRes = await axios.get('http://localhost:5000/api/libros');
         const estadosRes = await axios.get('http://localhost:5000/api/estados');
-        const editorialesRes = await axios.get('http://localhost:5000/api/editorial');
-        const idiomasRes = await axios.get('http://localhost:5000/api/idioma');
+        const editorialRes = await axios.get('http://localhost:5000/api/editorial');
+        const idiomaRes = await axios.get('http://localhost:5000/api/idioma');
 
         setLibros(librosRes.data);
         setEstados(estadosRes.data);
-        setEditoriales(editorialesRes.data);
-        setIdiomas(idiomasRes.data);
+        setEditorial(editorialRes.data);
+        setIdiomas(idiomaRes.data);
       } catch (err) {
         console.error('Error al obtener los datos:', err);
         setError('No se pudo cargar la información. Intenta de nuevo.');
@@ -32,31 +32,31 @@ const Admin = () => {
     fetchData();
   }, []);
 
-  // Manejar cambio de estado de libro
+  // Manejar la actualización del estado de un libro
   const handleUpdate = (id, newEstado) => {
     setLibros(libros.map(libro => {
       if (libro.id === id) {
-        return { ...libro, id_estado: newEstado, isModified: true };
+        return { ...libro, id_estado: newEstado, isModified: true }; // Actualizar el estado localmente
       }
       return libro;
     }));
   };
 
-  // Guardar cambios en el backend
+  // Guardar los cambios en el backend
   const saveChanges = async (id, newEstado) => {
     try {
-      setError(null); // Resetear errores
-      // Verificar que newEstado sea un número
+      setError(null);
       if (typeof newEstado !== 'number') {
         throw new Error('Datos inválidos.');
       }
 
+      // Crear el objeto con los cambios a enviar al backend
       const libroActualizado = { id_estado: newEstado };
-
-      // Actualizar en el backend (solo actualiza id_estado)
+      
+      // Enviar los cambios al backend
       await axios.put(`http://localhost:5000/api/libros/${id}`, libroActualizado);
 
-      // Actualizar estado local
+      // Actualizar el estado de los libros en el frontend después de que se guarden los cambios
       setLibros((prevLibros) =>
         prevLibros.map((libro) =>
           libro.id === id ? { ...libro, id_estado: newEstado, isModified: false } : libro
@@ -70,7 +70,7 @@ const Admin = () => {
     }
   };
 
-  // Renderizar filas de la tabla
+  // Renderizar las filas de la tabla de libros
   const renderTableRows = () => {
     return libros.map((libro) => (
       <tr key={libro.id}>
@@ -98,9 +98,9 @@ const Admin = () => {
             </Button>
           )}
         </td>
-        <td>{editoriales.find((ed) => ed.id === libro.id_editorial)?.nombre || 'No disponible'}</td>
+        <td>{editorial.find((ed) => ed.id === libro.id_editorial)?.nombre || 'No disponible'}</td>
         <td>{idiomas.find((idioma) => idioma.id === libro.id_idioma)?.idioma || 'No disponible'}</td>
-        <td>{libro.cantidad}</td> {/* Nueva columna para la cantidad */}
+        <td>{libro.cantidad}</td>
       </tr>
     ));
   };
@@ -129,5 +129,3 @@ const Admin = () => {
 };
 
 export default Admin;
-
-

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Necesitamos para la redirección
-import api from '../services/api';
+import api from '../services/api'; // Asegúrate de que api.js esté configurado correctamente para las solicitudes
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'; // Importar componentes de Bootstrap
 
 const Login = ({ setUserType }) => {
@@ -12,20 +12,30 @@ const Login = ({ setUserType }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            console.log('Usuario:', username, 'Contraseña:', password); // Verifica si los valores son correctos
+
+            // Realizar la solicitud POST para autenticar al usuario
             const response = await api.post('/usuario', { username, password });
-            console.log('Respuesta del servidor:', response.data);
-    
-            // Guardar token en localStorage
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('userType', response.data.userType);  // Guardar tipo de usuario
-    
-            setUserType(response.data.userType); // Guardar el tipo de usuario en el estado
-    
-            // Redirigir según el tipo de usuario
-            if (response.data.userType === 'admin') {
-                navigate('/admin');
+
+            console.log('Respuesta del servidor:', response.data); // Verifica la respuesta del servidor
+
+            // Si la autenticación es exitosa, guardamos el token y el tipo de usuario
+            if (response.data.token) {
+                // Guardar el token y el tipo de usuario en localStorage
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('userType', response.data.userType);
+
+                // Configurar el tipo de usuario en el estado del componente
+                setUserType(response.data.userType);
+
+                // Redirigir a la ruta correspondiente según el tipo de usuario
+                if (response.data.userType === 'admin') {
+                    navigate('/admin'); // Redirigir a la página de admin
+                } else {
+                    navigate('/user'); // Redirigir a la página de usuario
+                }
             } else {
-                navigate('/user');
+                setError('Credenciales incorrectas');
             }
         } catch (err) {
             console.error('Error al autenticar:', err);
@@ -40,7 +50,7 @@ const Login = ({ setUserType }) => {
                     <div className="text-center mb-4">
                         <h2>Iniciar Sesión</h2>
                     </div>
-                    {error && <Alert variant="danger">{error}</Alert>}
+                    {error && <Alert variant="danger">{error}</Alert>} {/* Mostrar alerta si hay error */}
                     <Form onSubmit={handleSubmit} className="shadow p-4 rounded bg-light">
                         <Form.Group className="mb-3" controlId="formUsername">
                             <Form.Label>Usuario</Form.Label>
