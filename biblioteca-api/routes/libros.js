@@ -1,3 +1,4 @@
+// routes/libros.js
 const express = require('express');
 const router = express.Router();
 const connection = require('../config/db'); // Conexión a la base de datos
@@ -44,14 +45,12 @@ router.get('/', (req, res) => {
         const librosConCopias = results.reduce((acc, row) => {
             const libro = acc.find(libro => libro.id === row.id);
             if (libro) {
-                // Si el libro ya existe, agregar la copia
                 libro.copias.push({
                     copia_id: row.copia_id,
                     estado: row.estado,
                     prestado: row.prestado
                 });
             } else {
-                // Si el libro no existe, agregarlo al acumulador
                 acc.push({
                     id: row.id,
                     titulo: row.titulo,
@@ -60,7 +59,7 @@ router.get('/', (req, res) => {
                     id_editorial: row.id_editorial,
                     id_idioma: row.id_idioma,
                     cantidad: row.cantidad,
-                    total_disponibles: row.total_disponibles, // Agregar el total de disponibles
+                    total_disponibles: row.total_disponibles,
                     copias: [{
                         copia_id: row.copia_id,
                         estado: row.estado,
@@ -71,7 +70,7 @@ router.get('/', (req, res) => {
             return acc;
         }, []);
 
-        res.json(librosConCopias); // Devolver los resultados agrupados
+        res.json(librosConCopias);
     });
 });
 
@@ -121,7 +120,6 @@ router.get('/:id', (req, res) => {
             return res.status(404).send('Libro no encontrado');
         }
 
-        // Agrupar las copias de un libro por id_libro
         const libro = {
             id: results[0].id,
             titulo: results[0].titulo,
@@ -130,7 +128,7 @@ router.get('/:id', (req, res) => {
             id_editorial: results[0].id_editorial,
             id_idioma: results[0].id_idioma,
             cantidad: results[0].cantidad,
-            total_disponibles: results[0].total_disponibles, // Agregar el total de disponibles
+            total_disponibles: results[0].total_disponibles,
             copias: results.map(row => ({
                 copia_id: row.copia_id,
                 estado: row.estado,
@@ -138,21 +136,19 @@ router.get('/:id', (req, res) => {
             }))
         };
 
-        res.json(libro); // Devolver el libro con sus copias y el total disponible
+        res.json(libro);
     });
 });
 
 // Ruta para actualizar el estado de una copia de libro
 router.put('/:libro_id/copia/:copia_id', (req, res) => {
-    const { libro_id, copia_id } = req.params; // Obtenemos ambos IDs
-    const { id_estado } = req.body; // Esperamos solo el 'id_estado'
+    const { libro_id, copia_id } = req.params;
+    const { id_estado } = req.body;
 
-    // Validar que id_estado sea un número válido
     if (typeof id_estado !== 'number' || isNaN(id_estado)) {
         return res.status(400).json({ message: 'Estado inválido. Debe ser un número.' });
     }
 
-    // Consulta para actualizar el estado de una copia de libro específica
     const query = 'UPDATE copias_libros SET id_estado = ? WHERE id_libro = ? AND id = ?';
     connection.query(query, [id_estado, libro_id, copia_id], (err, results) => {
         if (err) {
@@ -169,5 +165,3 @@ router.put('/:libro_id/copia/:copia_id', (req, res) => {
 });
 
 module.exports = router;
-
-
