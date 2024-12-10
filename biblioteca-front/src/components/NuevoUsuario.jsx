@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 const NuevoUsuario = () => {
     const [formData, setFormData] = useState({
@@ -13,9 +14,53 @@ const NuevoUsuario = () => {
         direccion: '',
         telefono: '',
     });
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
+
+    const validate = () => {
+        if (!formData.nombre.trim()) {
+            Swal.fire('Error', 'El nombre es obligatorio.', 'error');
+            return false;
+        } else if (!/^[a-zA-Z]{3,11}$/.test(formData.nombre)) {
+            Swal.fire('Error', 'El nombre debe tener entre 3 y 11 letras y no debe contener números.', 'error');
+            return false;
+        }
+        if (!formData.email.trim()) {
+            Swal.fire('Error', 'El correo electrónico es obligatorio.', 'error');
+            return false;
+        } else if (!/.+@.+\..+/.test(formData.email)) {
+            Swal.fire('Error', 'El correo electrónico debe contener un @ y un dominio válido.', 'error');
+            return false;
+        }
+        if (!formData.password.trim()) {
+            Swal.fire('Error', 'La contraseña es obligatoria.', 'error');
+            return false;
+        } else if (formData.password.length < 6) {
+            Swal.fire('Error', 'La contraseña debe tener al menos 6 caracteres.', 'error');
+            return false;
+        } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(formData.password)) {
+            Swal.fire('Error', 'La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial.', 'error');
+            return false;
+        }
+        if (!formData.dni.trim()) {
+            Swal.fire('Error', 'El DNI es obligatorio.', 'error');
+            return false;
+        } else if (!/^\d+$/.test(formData.dni)) {
+            Swal.fire('Error', 'El DNI debe contener solo números.', 'error');
+            return false;
+        }
+        if (!formData.direccion.trim()) {
+            Swal.fire('Error', 'La dirección es obligatoria.', 'error');
+            return false;
+        }
+        if (!formData.telefono.trim()) {
+            Swal.fire('Error', 'El teléfono es obligatorio.', 'error');
+            return false;
+        } else if (!/^\d{11}$/.test(formData.telefono)) {
+            Swal.fire('Error', 'El teléfono debe contener exactamente 11 dígitos.', 'error');
+            return false;
+        }
+        return true;
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,15 +69,15 @@ const NuevoUsuario = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
-        setSuccess(false);
+
+        if (!validate()) return;
 
         try {
             await api.put('/usuario', formData);
-            setSuccess(true);
+            Swal.fire('Éxito', 'Usuario creado exitosamente.', 'success');
             setTimeout(() => navigate('/'), 2000);
         } catch (err) {
-            setError('No se pudo crear el usuario. Intente nuevamente.');
+            Swal.fire('Error', 'No se pudo crear el usuario. Intente nuevamente.', 'error');
         }
     };
 
@@ -43,8 +88,6 @@ const NuevoUsuario = () => {
                     <div className="text-center mb-4">
                         <h2>Crear Nuevo Usuario</h2>
                     </div>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    {success && <Alert variant="success">Usuario creado exitosamente. Redirigiendo...</Alert>}
                     <Form onSubmit={handleSubmit} className="shadow p-4 rounded bg-light">
                         <Form.Group className="mb-3" controlId="formNombre">
                             <Form.Label>Nombre</Form.Label>
