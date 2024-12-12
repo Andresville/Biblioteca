@@ -1,0 +1,15 @@
+
+  /* Estilo para el título */
+  .container h1 {
+    color: #7ec8e3; /* Título en celeste claro */
+    font-family: 'Arial', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .container th,
+  .container td {
+    padding: 12px;
+    border: 1px solid #d1c7b7;
+  }
+  

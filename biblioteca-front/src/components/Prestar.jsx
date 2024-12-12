@@ -66,7 +66,7 @@ const Prestar = () => {
                     </div>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">Prestamo creado exitosamente. Redirigiendo...</Alert>}
-                    <Form onSubmit={handleSubmit} className="shadow p-4 rounded bg-light">
+                    <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
                         
                         <Form.Group className="mb-3" controlId="formPassword">
                             <Form.Label>Fecha Prestamo</Form.Label>
@@ -79,7 +79,7 @@ const Prestar = () => {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formPassword">
+                        <Form.Group className="mb-5" controlId="formPassword">
                             <Form.Label>Fecha Devolucion</Form.Label>
                             <Form.Control
                                 type="date"
@@ -92,7 +92,7 @@ const Prestar = () => {
                             
                         </Form.Group>
                         
-                        <Button variant="success" type="submit" className="w-100">
+                        <Button variant="primary" type="submit" className="w-100">
                             Crear Prestamo
                         </Button>
                     </Form>
@@ -100,7 +100,7 @@ const Prestar = () => {
                         <Button
                             variant="link"
                             onClick={() => navigate('/User')}
-                            className="text-decoration-none"
+                            className="text-decoration-none text-light"
                         >
                             Volver al detalle de libros
                         </Button>

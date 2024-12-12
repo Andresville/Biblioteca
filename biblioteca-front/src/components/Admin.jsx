@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Libro from './Libro';
 import { Table, Container, Row, Col } from 'react-bootstrap';
+import './Admin.css'
 
 const Admin = () => {
   const [libros, setLibros] = useState([]);
@@ -36,15 +37,15 @@ const Admin = () => {
 
 
   return (
-    <Container className="d-flex justify-content-center text-center">
-      <Row className="w-100">
-        <Col md={12} className="mx-auto">
-          <h1 className="text-center">Gestión de Libros</h1>
+    <Container fluid className="text-center">
+      <Row>
+        <Col>
+          <h2 className='pb-3'>Gestión de Libros</h2>
           {error && <div className="alert alert-danger">{error}</div>}
-
-          <Table>
-            <thead>
-              <tr>
+          <div style={{ overflowY: "auto", maxHeight: "75vh" }}>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
                 <th className="table-dark">Título</th>
                 <th className="table-dark">Autor</th>
                 <th className="table-dark">Estado</th>
@@ -53,16 +54,15 @@ const Admin = () => {
                 <th className="table-dark">N° Copia</th>
                 <th className="table-dark">Prestado</th>
                 <th className="table-dark">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {libros.length === 0 ? (
-                <tr>
-                  <td colSpan="7">No se encontraron libros.</td>
                 </tr>
-              ) : (
-                libros.map((libro) => {
-                  return (
+              </thead>
+              <tbody>
+                {libros.length === 0 ? (
+                  <tr>
+                    <td colSpan="7">No se encontraron libros.</td>
+                  </tr>
+                ) : (
+                  libros.map((libro) => (
                     <React.Fragment key={libro.id}>
                       <Libro
                         libro={libro}
@@ -72,21 +72,19 @@ const Admin = () => {
                         setLibros={setLibros}
                       />
                       <tr className="table-dark">
-                        <td colSpan="8">
-                          Total de libros: {libro.cantidad}
-                        </td>
+                        <td colSpan="8">Total de libros: {libro.cantidad}</td>
                       </tr>
                       <tr className="table-dark">
                         <td colSpan="8">
-                          Total de libros disponibles para ser prestados: {libro.total_disponibles}
+                          Total de libros disponibles: {libro.total_disponibles}
                         </td>
                       </tr>
                     </React.Fragment>
-                  );
-                })
-              )}
-            </tbody>
-          </Table>
+                  ))
+                )}
+              </tbody>
+            </Table>
+          </div>
         </Col>
       </Row>
     </Container>

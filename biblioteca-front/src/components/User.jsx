@@ -32,71 +32,75 @@ const User = () => {
   }, []);
 
   return (
-    <Container className="d-flex justify-content-center align-items-center text-center">
+    <Container className="text-center">
       <Row className="w-100">
         <Col md={12} className="mx-auto">
-          <h1 className="text-center">Libros Disponibles</h1>
+          <h2 className="pb-3">Libros Disponibles</h2>
           {error && <div className="alert alert-danger">{error}</div>}
 
-          <Table>
-            <thead>
-              <tr>
-                <th className="table-dark">Título</th>
-                <th className="table-dark">Autor</th>
-                <th className="table-dark">Editorial</th>
-                <th className="table-dark">Idioma</th>
-                <th className="table-dark">N° de Copia</th>
-                <th className="table-dark">Acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              {libros.length === 0 ? (
+          <div style={{overflowY: "auto", maxHeight: "75vh"  }}>
+            <Table>
+              <thead>
                 <tr>
-                  <td colSpan="6">No se encontraron libros disponibles.</td>
+                  <th className="table-dark">Título</th>
+                  <th className="table-dark">Autor</th>
+                  <th className="table-dark">Editorial</th>
+                  <th className="table-dark">Idioma</th>
+                  <th className="table-dark">N° de Copia</th>
+                  <th className="table-dark">Acción</th>
                 </tr>
-              ) : (
-                libros.map((libro) => {
-                  const copiasFiltradas = libro.copias.filter(
-                    (copia) =>
-                      copia.estado === "presentable" && copia.prestado === 0
-                  );
+              </thead>
+              <tbody>
+                {libros.length === 0 ? (
+                  <tr>
+                    <td colSpan="6">No se encontraron libros disponibles.</td>
+                  </tr>
+                ) : (
+                  libros.map((libro) => {
+                    const copiasFiltradas = libro.copias.filter(
+                      (copia) =>
+                        copia.estado === "presentable" && copia.prestado === 0
+                    );
 
-                  return copiasFiltradas.length > 0
-                    ? copiasFiltradas.map((copia) => (
-                        <tr key={copia.copia_id}>
-                          <td>{libro.titulo}</td>
-                          <td>{libro.autor}</td>
-                          <td>
-                            {
-                              editoriales.find(
-                                (editorial) =>
-                                  editorial.id === libro.id_editorial
-                              )?.nombre
-                            }
-                          </td>
-                          <td>
-                            {idiomas.length > 0
-                              ? idiomas.find(
-                                  (idioma) => idioma.id === libro.id_idioma
-                                )?.idioma || "No disponible"
-                              : "Cargando..."}
-                          </td>
-                          <td>{copia.copia_id}</td>
-                          <td>
-                            <Button
-                              onClick={() => navigate('/prestar', { state: { titulo: libro.titulo, copia: copia.copia_id } })}
-                              className="btn btn-primary"
-                            >
-                              Prestar
-                            </Button>
-                          </td>
-                        </tr>
-                      ))
-                    : null;
-                })
-              )}
-            </tbody>
-          </Table>
+                    return copiasFiltradas.length > 0
+                      ? copiasFiltradas.map((copia) => (
+                          <tr key={copia.copia_id}>
+                            <td>{libro.titulo}</td>
+                            <td>{libro.autor}</td>
+                            <td>
+                              {
+                                editoriales.find(
+                                  (editorial) =>
+                                    editorial.id === libro.id_editorial
+                                )?.nombre
+                              }
+                            </td>
+                            <td>
+                              {idiomas.length > 0
+                                ? idiomas.find(
+                                    (idioma) => idioma.id === libro.id_idioma
+                                  )?.idioma || "No disponible"
+                                : "Cargando..."}
+                            </td>
+                            <td>{copia.copia_id}</td>
+                            <td>
+                              <Button
+                                onClick={() =>
+                                  navigate('/prestar', { state: { titulo: libro.titulo, copia: copia.copia_id } })
+                                }
+                                className="btn btn-primary"
+                              >
+                                Prestar
+                              </Button>
+                            </td>
+                          </tr>
+                        ))
+                      : null;
+                  })
+                )}
+              </tbody>
+            </Table>
+          </div>
         </Col>
       </Row>
     </Container>
@@ -104,4 +108,3 @@ const User = () => {
 };
 
 export default User;
-

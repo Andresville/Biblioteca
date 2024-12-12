@@ -51,14 +51,14 @@ const Login = ({ setUserType }) => {
     };
 
     return (
-        <Container className="d-flex align-items-center justify-content-center" style={{ height: '65vh' }}>
+        <Container className="d-flex align-items-center justify-content-center" style={{width:'70%'}}>
             <Row className="w-100">
                 <Col md={6} className="mx-auto">
-                    <div className="text-center mb-5" style={{ color: '#7EC8E3' }}>
+                    <div className="text-center ">
                         <h2>Iniciar Sesión</h2>
                     </div>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleSubmit} className="shadow p-4 rounded bg-light">
+                    <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
                         <Form.Group className="mb-3" controlId="formUsername">
                             <Form.Label>Usuario</Form.Label>
                             <Form.Control
@@ -71,7 +71,7 @@ const Login = ({ setUserType }) => {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formPassword">
+                        <Form.Group className="mb-5" controlId="formPassword">
                             <Form.Label>Contraseña</Form.Label>
                             <Form.Control
                                 type="password"
@@ -87,11 +87,11 @@ const Login = ({ setUserType }) => {
                             Iniciar Sesión
                         </Button>
                     </Form>
-                    <div className="text-center mt-4">
+                    <div className="text-center rounded">
                         <Button
                             variant="link"
                             onClick={() => navigate('/nuevo-usuario')}
-                            className="text-decoration-none"
+                            className="text-decoration-none text-light"
                         >
                             Crear nuevo usuario
                         </Button>

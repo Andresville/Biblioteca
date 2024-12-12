@@ -37,103 +37,105 @@ const NuevoUsuario = () => {
     };
 
     return (
-        <Container className="d-flex justify-content-center align-items-center mt-3 mb-5">
-            <Row className="w-100">
+        <Container className="d-flex align-items-center justify-content-center" >
+            <Row className="w-100" >
                 <Col md={8} className="mx-auto">
-                    <div className="text-center mb-4">
+                    <div className="text-center">
                         <h2>Crear Nuevo Usuario</h2>
                     </div>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">Usuario creado exitosamente. Redirigiendo...</Alert>}
-                    <Form onSubmit={handleSubmit} className="shadow p-4 rounded bg-light">
-                        <Form.Group className="mb-3" controlId="formNombre">
-                            <Form.Label>Nombre</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Ingresa el nombre"
-                                name="nombre"
-                                value={formData.nombre}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Ingresa el correo electrónico"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formPassword">
-                            <Form.Label>Contraseña</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Ingresa la contraseña"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formRole">
-                            <Form.Label>Rol</Form.Label>
-                            <Form.Control
-                                as="select"
-                                name="role"
-                                value={formData.role}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="user">Usuario</option>
-                                <option value="admin">Administrador</option>
-                            </Form.Control>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formDni">
-                            <Form.Label>DNI</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Ingresa el DNI"
-                                name="dni"
-                                value={formData.dni}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formDireccion">
-                            <Form.Label>Dirección</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Ingresa la dirección"
-                                name="direccion"
-                                value={formData.direccion}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formTelefono">
-                            <Form.Label>Teléfono</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Ingresa el teléfono"
-                                name="telefono"
-                                value={formData.telefono}
-                                onChange={handleChange}
-                                required
-                            />
-                        </Form.Group>
-                        <Button variant="success" type="submit" className="w-100">
-                            Crear Usuario
-                        </Button>
-                    </Form>
+                    <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                        <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
+                            <Form.Group className="mb-3" controlId="formNombre">
+                                <Form.Label>Nombre</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Ingresa el nombre"
+                                    name="nombre"
+                                    value={formData.nombre}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Ingresa el correo electrónico"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formPassword">
+                                <Form.Label>Contraseña</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Ingresa la contraseña"
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formRole">
+                                <Form.Label>Rol</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    name="role"
+                                    value={formData.role}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="user">Usuario</option>
+                                    <option value="admin">Administrador</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formDni">
+                                <Form.Label>DNI</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Ingresa el DNI"
+                                    name="dni"
+                                    value={formData.dni}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formDireccion">
+                                <Form.Label>Dirección</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Ingresa la dirección"
+                                    name="direccion"
+                                    value={formData.direccion}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-5" controlId="formTelefono">
+                                <Form.Label>Teléfono</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Ingresa el teléfono"
+                                    name="telefono"
+                                    value={formData.telefono}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Button variant="primary" type="submit" className="w-100">
+                                Crear Usuario
+                            </Button>
+                        </Form>
+                    </div>
                     <div className="text-center mt-4">
                         <Button
                             variant="link"
                             onClick={() => navigate('/')}
-                            className="text-decoration-none"
+                            className="text-decoration-none text-light"
                         >
                             Volver al inicio
                         </Button>

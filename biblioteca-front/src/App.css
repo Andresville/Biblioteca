@@ -1,7 +1,7 @@
 .library-background {
     background-image: url('https://imgs.search.brave.com/loBlBIDhXJAqoAzE-stNHFrw-F6XkrR7rjuDE4FjStI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS92aXN0YS1iaWJs/aW90ZWNhLW1vZGVy/bmEtZ2VuZXJhZGEt/aWFfMTA3NDg4NC0x/NTY3LmpwZz9zZW10/PWFpc19oeWJyaWQ');
     background-size: cover; 
-    background-position: center; 
+    background-position: center;
     height: 100vh; 
     width: 100vw; 
     position: fixed;
@@ -10,9 +10,6 @@
     z-index: -1; 
 }
 
-.container {
-    z-index: 1; 
-}
 
 
 .title {
