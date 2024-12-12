@@ -36,7 +36,7 @@ const Admin = () => {
 
 
   return (
-    <Container className="d-flex justify-content-center align-items-center text-center">
+    <Container className="d-flex justify-content-center text-center">
       <Row className="w-100">
         <Col md={12} className="mx-auto">
           <h1 className="text-center">Gestión de Libros</h1>

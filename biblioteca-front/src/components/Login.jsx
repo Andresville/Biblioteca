@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../components/UserContext';
 import api from '../services/api';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+
 
 const Login = ({ setUserType }) => {
     const { saveUserId } = useUser();
@@ -50,10 +51,10 @@ const Login = ({ setUserType }) => {
     };
 
     return (
-        <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <Container className="d-flex align-items-center justify-content-center" style={{ height: '65vh' }}>
             <Row className="w-100">
                 <Col md={6} className="mx-auto">
-                    <div className="text-center mb-4">
+                    <div className="text-center mb-5" style={{ color: '#7EC8E3' }}>
                         <h2>Iniciar Sesión</h2>
                     </div>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -82,7 +83,7 @@ const Login = ({ setUserType }) => {
                             />
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" className="w-100">
+                        <Button variant="primary" type="submit" className="w-100" >
                             Iniciar Sesión
                         </Button>
                     </Form>
