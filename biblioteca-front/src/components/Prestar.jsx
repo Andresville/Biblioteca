@@ -60,9 +60,10 @@ const Prestar = () => {
     return (
         <div
     style={{
-        background: "linear-gradient(rgba(0, 0, 0, 0.85), rgba(99, 38, 117, 0.5), rgba(0, 0, 0, 0.85))",
-      minHeight: '100vh',
-      minWidth:'100vw',
+        maxHeight: '80vh',
+        overflowY: 'auto',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none', 
     }}
 >
         <Container className="d-flex justify-content-center align-items-center text-center w-100 p-5">

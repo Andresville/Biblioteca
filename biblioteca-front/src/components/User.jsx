@@ -57,11 +57,6 @@ const User = () => {
 
   return (
     <div
-    style={{
-      background: "linear-gradient(rgba(0, 0, 0, 0.85), rgba(99, 38, 117, 0.5), rgba(0, 0, 0, 0.85))",
-      minHeight: '100vh',
-      minWidth:'100vw',
-    }}
 >
       <Container className="text-center">
         <Row className="w-100">

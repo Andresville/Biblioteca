@@ -56,28 +56,21 @@ const NuevoUsuario = () => {
   return (
     <div
       style={{
-        background:
-          "linear-gradient(rgba(0, 0, 0, 0.85), rgba(99, 38, 117, 0.5), rgba(0, 0, 0, 0.85))",
-        minHeight: "100vh",
-        minWidth: "100vw",
+        maxHeight: '80vh',
+        overflowY: 'auto', 
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none', 
       }}
     >
-      <Container className="d-flex align-items-center justify-content-center">
-        <Row className="w-100">
-          <Col md={9} className="mx-auto">
-            <h1 className="text-center pb-3 fw-bold text-light">
-              Nuevo Usuario
-            </h1>
+      <Container className="d-flex align-items-center justify-content-center" >
+        <Row className="w-100" >
+          <Col md={8} className="mx-auto">
+            <div className="text-center">
+              <h2>Crear Nuevo Usuario</h2>
+            </div>
             {error && <Alert variant="danger">{error}</Alert>}
-            {success && (
-              <Alert variant="success">
-                Usuario creado exitosamente. Redirigiendo...
-              </Alert>
-            )}
-            <Form
-              onSubmit={handleSubmit}
-              className="shadow p-4 rounded bg-light"
-            >
+            {success && <Alert variant="success">Usuario creado exitosamente. Redirigiendo...</Alert>}
+            <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
               <Form.Group className="mb-3" controlId="formNombre">
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control
@@ -157,14 +150,14 @@ const NuevoUsuario = () => {
                   required
                 />
               </Form.Group>
-              <Button variant="primary" type="submit" className="w-100">
+              <Button variant="primary" type="submit" className="mx-auto d-block" >
                 Crear Usuario
               </Button>
             </Form>
-            <div className="text-center mt-4">
+            <div className="text-center ">
               <Button
                 variant="link"
-                onClick={() => navigate("/")}
+                onClick={() => navigate('/')}
                 className="text-decoration-none text-light"
               >
                 Volver al inicio

@@ -48,27 +48,23 @@ const NuevoLibro = () => {
   };
 
   return (
-    <div
-      style={{
-        background:"linear-gradient(rgba(0, 0, 0, 0.85), rgba(99, 38, 117, 0.5), rgba(0, 0, 0, 0.85))",
-        minHeight: "100vh",
-        minWidth: "100vw",
-      }}
-    >
-      <Container className="d-flex justify-content-center align-items-center w-100 p-5">
+    <div style={{
+      maxHeight: '80vh',
+      overflowY: 'auto',
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none', 
+    }}>
+      <Container className="d-flex align-items-center justify-content-center">
         <Row className="w-100">
           <Col md={9} className="mx-auto">
-            <h1 className="text-center pb-3 fw-bold text-light">Nuevo Libro</h1>
+            <h2 className="text-center pb-3">Nuevo Libro</h2>
             {error && <Alert variant="danger">{error}</Alert>}
             {success && (
               <Alert variant="success">
                 Libro registrado exitosamente. Redirigiendo...
               </Alert>
             )}
-            <Form
-              onSubmit={handleSubmit}
-              className="shadow p-4 rounded bg-light"
-            >
+            <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
               <Form.Group className="mb-3" controlId="formTitulo">
                 <Form.Label>Titulo</Form.Label>
                 <Form.Control
@@ -128,7 +124,7 @@ const NuevoLibro = () => {
                 </Form.Control>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formEditorial">
-                <Form.Label>Editoria</Form.Label>
+                <Form.Label>Editorial</Form.Label>
                 <Form.Control
                   as="select"
                   name="editorial"
@@ -170,11 +166,11 @@ const NuevoLibro = () => {
                   required
                 />
               </Form.Group>
-              <Button variant="success" type="submit" className="w-100">
+              <Button variant="success" type="submit" className="mx-auto d-block">
                 Registrar Nuevo Libro
               </Button>
             </Form>
-            <div className="text-center mt-4">
+            <div className="text-center">
               <Button
                 variant="link"
                 onClick={() => navigate("/Admin")}

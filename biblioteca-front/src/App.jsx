@@ -28,7 +28,7 @@ const App = () => {
 
     return (
       <div className="library-background d-flex align-items-center justify-content-center">
-        <div className="container text-light " style={{ width: "75%" }}>
+        <div className="container text-light py-3 " style={{ height:'auto', width:'60%'}}>
           <div
             className="p-3 rounded custom-shadow"
             style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
