@@ -58,7 +58,7 @@ const Login = ({ setUserType }) => {
                         <h2>Iniciar Sesión</h2>
                     </div>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
+                    <Form onSubmit={handleSubmit} >
                         <Form.Group className="mb-3" controlId="formUsername">
                             <Form.Label>Usuario</Form.Label>
                             <Form.Control
@@ -83,11 +83,11 @@ const Login = ({ setUserType }) => {
                             />
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" className="w-100" >
+                        <Button variant="primary" type="submit" className="mx-auto d-block" >
                             Iniciar Sesión
                         </Button>
                     </Form>
-                    <div className="text-center rounded">
+                    <div className="text-center rounded py-3">
                         <Button
                             variant="link"
                             onClick={() => navigate('/nuevo-usuario')}

@@ -22,7 +22,7 @@ const App = () => {
 
     return (
         <div className="library-background d-flex align-items-center justify-content-center">
-            <div className="container text-light " style={{ width: '75%'}}>
+            <div className="container text-light py-3" style={{ height: 'auto'}}>
                 <div className="p-3 rounded custom-shadow" style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
                 <h1 className=" title text-center mt-3" style={{ color: '#7EC8E3' }}>Biblioteca Aleph</h1>
                     <UserProvider>

@@ -96,7 +96,7 @@ const Prestar = () => {
                             Crear Prestamo
                         </Button>
                     </Form>
-                    <div className="text-center mt-4">
+                    <div className="text-center pt-3">
                         <Button
                             variant="link"
                             onClick={() => navigate('/User')}
