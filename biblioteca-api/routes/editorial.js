@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 // Obtener una editorial por ID
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  connection.query('SELECT * FROM editoria WHERE id = ?', [id], (err, results) => {
+  connection.query('SELECT * FROM editorial WHERE id = ?', [id], (err, results) => {
     if (err) {
       console.error('Error al ejecutar la consulta:', err);
       return res.status(500).json({ error: 'Error al obtener la editorial' });
