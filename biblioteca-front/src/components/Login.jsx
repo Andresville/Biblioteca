@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../Context/UserContext";
 import api from "../services/api";
-import { Container, Form, Button, Alert } from "react-bootstrap";
+import { Container, Form, Button, Alert,Row,Col } from "react-bootstrap";
 
 
 
@@ -47,66 +47,59 @@ const Login = ({ setUserType }) => {
   };
 
   return (
-    <div
-    style={{
-      background: "linear-gradient(rgba(0, 0, 0, 0.85), rgba(99, 38, 117, 0.5), rgba(0, 0, 0, 0.85))",
-      minHeight: '100vh',
-      minWidth:'100vw',
-    }}
->
-      <Container className="d-flex align-items-center justify-content-center">
-        <div
-          className="container"
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.9)",
-            borderRadius: "8px",
-            padding: "3% ",
-            width: "100%",
-            maxWidth: "600px",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <h2 className="text-center">Iniciar Sesión</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formUsername">
-              <Form.Label>Usuario</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Ingresa tu usuario"
-                value={username}
-                onChange={handleChange}
-                name="username"
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-5" controlId="formPassword">
-              <Form.Label>Contraseña</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Ingresa tu contraseña"
-                value={password}
-                onChange={handleChange}
-                name="password"
-                required
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit" className="mx-auto d-block">
-              Iniciar Sesión
-            </Button>
-          </Form>
-          <div className="text-center rounded py-3">
-            <Button
-              variant="link"
-              onClick={() => navigate("/nuevo-usuario")}
-              className="text-decoration-none text-light"
-            >
-              Crear nuevo usuario
-            </Button>
-          </div>
-        </div>
+    <div>
+      <Container
+        className="d-flex align-items-center justify-content-center"
+        style={{ width: "70%" }}
+      >
+        <Row className="w-100">
+          <Col md={6} className="mx-auto">
+            <div className="text-center ">
+              <h2>Iniciar Sesión</h2>
+            </div>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit} className="shadow rounded">
+              <Form.Group className="mb-3" controlId="formUsername">
+                <Form.Label>Usuario</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ingresa tu usuario"
+                  value={username}
+                  onChange={handleChange}
+                  name="username"
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-5" controlId="formPassword">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Ingresa tu contraseña"
+                  value={password}
+                  onChange={handleChange}
+                  name="password"
+                  required
+                />
+              </Form.Group>
+
+              <Button variant="primary" type="submit" className="w-100">
+                Iniciar Sesión
+              </Button>
+            </Form>
+            <div className="text-center rounded">
+              <Button
+                variant="link"
+                onClick={() => navigate("/nuevo-usuario")}
+                className="text-decoration-none text-light"
+              >
+                Crear nuevo usuario
+              </Button>
+            </div>
+          </Col>
+        </Row>
       </Container>
-      </div>
+    </div>
   );
 };
 

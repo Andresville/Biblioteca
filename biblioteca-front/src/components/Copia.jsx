@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Copia = ({ copia, titulo, autor, editorial, idioma }) => {
   // Mapear los estados textuales a números

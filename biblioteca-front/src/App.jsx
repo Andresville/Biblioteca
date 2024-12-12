@@ -27,22 +27,50 @@ const App = () => {
     }, [userType]);
 
     return (
-        <UserProvider>
-            <LibraryProvider>
-        <Router>
-            <Routes>
-                <Route path="/" element={<Login setUserType={setUserType} />} />
-                <Route path="/nuevo-usuario" element={<NuevoUsuario />} />
-                <Route path="/admin" element={userType === 'admin' ? <Admin /> : <p>No autorizado</p>} />
-                <Route path="/user" element={userType === 'user' ? <User /> : <p>No autorizado</p>} />
-                <Route path="/prestar" element={<Prestar />} />
-                <Route path="/devolucion" element={<Devolucion />} />
-                <Route path="/nuevo-libro" element={<NuevoLibro />} />
-                <Route path="/eliminar-copia" element={<EliminarCopia />} />
-            </Routes>
-        </Router>
-        </LibraryProvider>
-        </UserProvider>
+      <div className="library-background d-flex align-items-center justify-content-center">
+        <div className="container text-light " style={{ width: "75%" }}>
+          <div
+            className="p-3 rounded custom-shadow"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
+          >
+            <h1
+              className=" title text-center mt-3"
+              style={{ color: "#7EC8E3" }}
+            >
+              Biblioteca Aleph
+            </h1>
+            <UserProvider>
+              <LibraryProvider>
+                <Router>
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={<Login setUserType={setUserType} />}
+                    />
+                    <Route path="/nuevo-usuario" element={<NuevoUsuario />} />
+                    <Route
+                      path="/admin"
+                      element={
+                        userType === "admin" ? <Admin /> : <p>No autorizado</p>
+                      }
+                    />
+                    <Route
+                      path="/user"
+                      element={
+                        userType === "user" ? <User /> : <p>No autorizado</p>
+                      }
+                    />
+                    <Route path="/prestar" element={<Prestar />} />
+                    <Route path="/devolucion" element={<Devolucion />} />
+                    <Route path="/nuevo-libro" element={<NuevoLibro />} />
+                    <Route path="/eliminar-copia" element={<EliminarCopia />} />
+                  </Routes>
+                </Router>
+              </LibraryProvider>
+            </UserProvider>
+          </div>
+        </div>
+      </div>
     );
 };
 
