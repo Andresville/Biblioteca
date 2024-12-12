@@ -56,7 +56,7 @@ const Login = ({ setUserType }) => {
                     </div>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit} >
-                        <Form.Group className="mb-3" controlId="formUsername">
+                        <Form.Group className="mb-3 mt-3" controlId="formUsername">
                             <Form.Label>Usuario</Form.Label>
                             <Form.Control
                                 type="text"
