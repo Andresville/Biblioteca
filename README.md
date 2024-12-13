@@ -4,7 +4,18 @@ Este proyecto es una aplicación completa para la gestión y administración de 
 
 ---
 
-## Tecnologías Usadas
+## Tabla de Contenidos
+1. [Tecnologías Usadas](#tecnologías-usadas)
+2. [Funcionalidades Principales](#funcionalidades-principales)
+3. [Instalación y Configuración](#instalación-y-configuración)
+   - [Backend](#backend)
+   - [Frontend](#frontend)
+4. [Estructura de Carpetas](#estructura-de-carpetas)
+5. [Instrucciones de Uso](#instrucciones-de-uso)
+6. [Como clonar el repositorio](#clonar)
+
+
+## 1. Tecnologías Usadas
 
 ### Backend
 - **Node.js**: Servidor para manejar las APIs.
@@ -20,7 +31,7 @@ Este proyecto es una aplicación completa para la gestión y administración de 
 
 ---
 
-## Funcionalidades Principales
+## 2. Funcionalidades Principales
 
 ### Sistema de Autenticación
 - **Inicio de sesión**: Los usuarios pueden autenticarse ingresando sus credenciales.
@@ -31,7 +42,7 @@ Este proyecto es una aplicación completa para la gestión y administración de 
 
 ### Funcionalidades para Administradores
 - Crear nuevos libros y agregar información sobre:
-  - Título, autor, editorial, idioma, número de copias.
+- Título, autor, editorial, idioma, número de copias.
 - Cambiar estados de las copias de libros (por ejemplo, disponible o prestado).
 - Eliminar copias de libros de la base de datos.
 - Registrar devoluciones de libros prestados.
@@ -43,7 +54,7 @@ Este proyecto es una aplicación completa para la gestión y administración de 
 
 ---
 
-## Instalación y Configuración
+## 3. Instalación y Configuración
 
 ### Prerrequisitos
 1. **Node.js** y **npm** instalados.
@@ -62,7 +73,7 @@ Este proyecto es una aplicación completa para la gestión y administración de 
    JWT_SECRET=clave_secreta
    ```
 4. Ejecutar las migraciones de la base de datos (si aplica).
-5. Iniciar el servidor con `npm start` o `node server.js`.
+5. Iniciar el servidor con `npm start` o `node index.js`.
 
 ### Instalación del Frontend
 1. Clonar el repositorio del frontend.
@@ -71,7 +82,38 @@ Este proyecto es una aplicación completa para la gestión y administración de 
 
 ---
 
-## Instrucciones de Uso
+### 4. Estructura de carpetas
+
+FRONT
+
+biblioteca-front/
+├── public/                   # Archivos estáticos
+├── src/                      # Código fuente
+│   ├── components/           # Componentes React
+│   ├── Context/              # Contexto de usuario
+│   ├── services/             # Llamadas a la API
+│   ├── App.js                # Componente principal
+│   ├── index.js              # Punto de entrada
+│   └── ...
+├── package.json              # Configuración de dependencias
+└── vite.config.js            # Configuración de Vite
+
+
+BACKEND
+
+biblioteca-api/
+├── node_modules/             # Dependencias de Node.js
+├── controllers/              # Lógica de controladores
+├── routes/                   # Rutas de la API
+├── .env                      # Variables de entorno
+├── index.js                  # Punto de entrada del servidor
+├── package.json              # Configuración de dependencias
+└── ...
+
+
+
+
+## 5. Instrucciones de Uso
 
 1. Iniciar sesión como **usuario** o **administrador**.
 2. Navegar según las funcionalidades asignadas:
@@ -82,6 +124,25 @@ Este proyecto es una aplicación completa para la gestión y administración de 
 
 ---
 
+### 6. Como clonar el repositorio
+
+6. Clonar el repositorio
+
+Para clonar este repositorio en tu máquina local, sigue estos pasos:
+
+A) Asegúrate de tener Git instalado en tu sistema.
+
+B) Abre una terminal o línea de comandos.
+
+C) Ejecuta el siguiente comando para clonar el repositorio:
+
+git clone https://github.com/Andresville/Biblioteca.git
+
+D) Navega al directorio clonado usando el comando:
+
+cd Biblioteca
+
+E) Si utilizas el Visual Studio Code puedes inicializarlo colocando el "code ." dentro de la carpeta en la que clonaste.
 
 © 2024 Biblioteca Digital. Todos los derechos reservados.
 
