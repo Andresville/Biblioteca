@@ -48,12 +48,14 @@ const NuevoLibro = () => {
   };
 
   return (
-    <div style={{
-      maxHeight: '80vh',
-      overflowY: 'auto',
-      scrollbarWidth: 'none',
-      msOverflowStyle: 'none', 
-    }}>
+    <div
+      style={{
+        maxHeight: "80vh",
+        overflowY: "auto",
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+      }}
+    >
       <Container className="d-flex align-items-center justify-content-center">
         <Row className="w-100">
           <Col md={9} className="mx-auto">
@@ -64,59 +66,81 @@ const NuevoLibro = () => {
                 Libro registrado exitosamente. Redirigiendo...
               </Alert>
             )}
-            <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
+            <Form onSubmit={handleSubmit} className="shadow p-4 rounded" aria-label="Formulario para registrar un nuevo libro">
               <Form.Group className="mb-3" controlId="formTitulo">
-                <Form.Label>Titulo</Form.Label>
+                <Form.Label htmlFor="titulo">Titulo</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Ingresa el titulo"
                   name="titulo"
+                  id="titulo"
                   value={formData.titulo}
                   onChange={handleChange}
                   required
+                  aria-required="true"
+                  aria-describedby="tituloHelp"
                 />
+                <Form.Text id="tituloHelp" className="text-muted">
+                  Escribe el título del libro.
+                </Form.Text>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formAutor">
-                <Form.Label>Autor</Form.Label>
+                <Form.Label htmlFor="autor">Autor</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Ingresa el autor"
                   name="autor"
+                  id="autor"
                   value={formData.autor}
                   onChange={handleChange}
                   required
+                  aria-required="true"
+                  aria-describedby="autorHelp"
                 />
+                <Form.Text id="autorHelp" className="text-muted">
+                  Escribe el nombre del autor del libro.
+                </Form.Text>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formISBN">
-                <Form.Label>ISBN</Form.Label>
+                <Form.Label htmlFor="ISBN">ISBN</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Ingresa el ISBN"
                   name="ISBN"
+                  id="ISBN"
                   value={formData.ISBN}
                   onChange={handleChange}
                   required
+                  aria-required="true"
+                  aria-describedby="isbnHelp"
                 />
+                <Form.Text id="isbnHelp" className="text-muted">
+                  Proporciona el código ISBN del libro.
+                </Form.Text>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formImg">
-                <Form.Label>Ruta Imagen</Form.Label>
+                <Form.Label htmlFor="ruta_imagen">Ruta Imagen</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="/static/Img/Nombre_Imagen.jpg"
                   name="ruta_imagen"
+                  id="ruta_imagen"
                   value={formData.ruta_imagen}
                   onChange={handleChange}
                   required
+                  aria-required="true"
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formEstado">
-                <Form.Label>Estado</Form.Label>
+                <Form.Label htmlFor="estado">Estado</Form.Label>
                 <Form.Control
                   as="select"
                   name="estado"
+                  id="estado"
                   value={formData.estado}
                   onChange={handleChange}
                   required
+                  aria-required="true"
                 >
                   <option value={0}></option>
                   <option value={2}>Presentable</option>
@@ -124,13 +148,15 @@ const NuevoLibro = () => {
                 </Form.Control>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formEditorial">
-                <Form.Label>Editorial</Form.Label>
+                <Form.Label htmlFor="editorial">Editorial</Form.Label>
                 <Form.Control
                   as="select"
                   name="editorial"
+                  id="editorial"
                   value={formData.editorial}
                   onChange={handleChange}
                   required
+                  aria-required="true"
                 >
                   <option value={0}></option>
                   <option value={1}>Editorial Planeta</option>
@@ -140,13 +166,15 @@ const NuevoLibro = () => {
                 </Form.Control>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formIdioma">
-                <Form.Label>Idioma</Form.Label>
+                <Form.Label htmlFor="idioma">Idioma</Form.Label>
                 <Form.Control
                   as="select"
                   name="idioma"
+                  id="idioma"
                   value={formData.idioma}
                   onChange={handleChange}
                   required
+                  aria-required="true"
                 >
                   <option value={0}></option>
                   <option value={1}>Español</option>
@@ -156,17 +184,24 @@ const NuevoLibro = () => {
                 </Form.Control>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formCantidad">
-                <Form.Label>Cantidad</Form.Label>
+                <Form.Label htmlFor="cantidad">Cantidad</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Ingresa la cantidad de libros"
                   name="cantidad"
+                  id="cantidad"
                   value={formData.cantidad}
                   onChange={handleChange}
                   required
+                  aria-required="true"
                 />
               </Form.Group>
-              <Button variant="success" type="submit" className="mx-auto d-block">
+              <Button
+                variant="success"
+                type="submit"
+                className="mx-auto d-block"
+                aria-label="Registrar Nuevo Libro"
+              >
                 Registrar Nuevo Libro
               </Button>
             </Form>
@@ -175,6 +210,7 @@ const NuevoLibro = () => {
                 variant="link"
                 onClick={() => navigate("/Admin")}
                 className="text-decoration-none fw-bold text-light"
+                aria-label="Volver al detalle de libros"
               >
                 Volver al detalle de libros
               </Button>
