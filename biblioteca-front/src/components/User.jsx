@@ -57,19 +57,17 @@ const User = () => {
 
   return (
     <div
-    style={{
-      maxHeight: '80vh',
-      overflowY: 'auto', 
-      scrollbarWidth: 'none',
-      msOverflowStyle: 'none', 
-    }}
->
+      style={{
+        maxHeight: "80vh",
+        overflowY: "auto",
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+      }}
+    >
       <Container className="text-center">
         <Row className="w-100">
           <Col md={12} className="mx-auto">
-            <h2 className="pb-3">
-              Libros Disponibles
-            </h2>
+            <h2 className="pb-3">Libros Disponibles</h2>
 
             {/* Barra de Búsqueda */}
             <Form className="mb-4">
@@ -124,16 +122,6 @@ const User = () => {
                     return (
                       <Col md={6} className="mt-4" key={libro.id}>
                         <Card className="flex-row align-items-center h-100">
-                          <Card.Img
-                            variant="left"
-                            src={`http://localhost:5000${libro.ruta_imagen}`}
-                            style={{
-                              width: "150px",
-                              height: "auto",
-                              objectFit: "cover",
-                              borderRadius: "5px",
-                            }}
-                          />
                           <Card.Body>
                             <Card.Title>{libro.titulo}</Card.Title>
                             <Card.Text>

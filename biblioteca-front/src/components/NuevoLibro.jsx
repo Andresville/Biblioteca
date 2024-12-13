@@ -48,16 +48,21 @@ const NuevoLibro = () => {
   };
 
   return (
-    <div style={{
-      maxHeight: '80vh',
-      overflowY: 'auto',
-      scrollbarWidth: 'none',
-      msOverflowStyle: 'none', 
-    }}>
+    <div
+      style={{
+        maxHeight: "80vh",
+        overflowY: "auto", 
+        scrollbarWidth: "none", 
+        WebkitOverflowScrolling: "touch", 
+        border: "1px solid #ddd",
+        borderRadius: "5px", 
+        boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+      }}
+    >
       <Container className="d-flex align-items-center justify-content-center">
         <Row className="w-100">
           <Col md={9} className="mx-auto">
-            <h2 className="text-center pb-3">Nuevo Libro</h2>
+            <h2 className="text-center pb-3 pt-3">Nuevo Libro</h2>
             {error && <Alert variant="danger">{error}</Alert>}
             {success && (
               <Alert variant="success">
@@ -170,18 +175,28 @@ const NuevoLibro = () => {
                 Registrar Nuevo Libro
               </Button>
             </Form>
-            <div className="text-center">
-              <Button
-                variant="link"
-                onClick={() => navigate("/Admin")}
-                className="text-decoration-none fw-bold text-light"
-              >
-                Volver al detalle de libros
-              </Button>
-            </div>
           </Col>
         </Row>
       </Container>
+
+      <div
+        style={{
+          maxHeight: "80vh",
+          overflowY: "auto", 
+          scrollbarWidth: "none",
+          WebkitOverflowScrolling: "touch", 
+        }}
+      >
+        <div className="text-center">
+          <Button
+            variant="link"
+            onClick={() => navigate("/Admin")}
+            className="text-decoration-none fw-bold text-light"
+          >
+            Volver al detalle de libros
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
