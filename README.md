@@ -12,7 +12,7 @@ Este proyecto es una aplicación completa para la gestión y administración de 
    - [Frontend](#frontend)
 4. [Estructura de Carpetas](#estructura-de-carpetas)
 5. [Instrucciones de Uso](#instrucciones-de-uso)
-6. [Contribuir](#contribuir)
+6. [Como clonar el repositorio](#clonar)
 
 
 ## 1. Tecnologías Usadas
@@ -124,17 +124,25 @@ biblioteca-api/
 
 ---
 
-### 6. Contribuir
+### 6. Como clonar el repositorio
 
-Si deseas contribuir al proyecto, sigue estos pasos:
+6. Clonar el repositorio
 
-1) Haz un fork del repositorio.
-2) Crea una nueva rama (git checkout -b feature/nueva-caracteristica).
-3) Realiza tus cambios.
-4) Realiza un commit de tus cambios (git commit -am 'Agrega nueva característica').
-5) Haz push a tu rama (git push origin feature/nueva-caracteristica).
-6) Abre un Pull Request.
+Para clonar este repositorio en tu máquina local, sigue estos pasos:
 
+A) Asegúrate de tener Git instalado en tu sistema.
+
+B) Abre una terminal o línea de comandos.
+
+C) Ejecuta el siguiente comando para clonar el repositorio:
+
+git clone https://github.com/Andresville/Biblioteca.git
+
+D) Navega al directorio clonado usando el comando:
+
+cd Biblioteca
+
+E) Si utilizas el Visual Studio Code puedes inicializarlo colocando el "code ." dentro de la carpeta en la que clonaste.
 
 © 2024 Biblioteca Digital. Todos los derechos reservados.
 
