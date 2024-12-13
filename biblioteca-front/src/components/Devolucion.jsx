@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Table, Container, Row, Col, Button, Form } from "react-bootstrap";
 
-
 const Devolver = () => {
   const [libros, setLibros] = useState([]);
   const [editoriales, setEditoriales] = useState([]);
@@ -57,8 +56,7 @@ const Devolver = () => {
   );
 
   return (
-    <div
->
+    <div>
       <Container className="d-flex justify-content-center align-items-center text-center w-100 p-5">
         <Row className="w-100">
           <Col className="mx-auto">
@@ -66,7 +64,7 @@ const Devolver = () => {
               Devolución de Libros
             </h2>
             {error && <div className="alert alert-danger">{error}</div>}
-            
+
             {/* Barra de Búsqueda */}
             <Form className="mb-4">
               <Row>
@@ -81,65 +79,66 @@ const Devolver = () => {
               </Row>
             </Form>
 
-            {/* Tabla de libros */}
-            <div className="table-responsive">
-              <Table>
-                <thead>
-                  <tr>
-                    <th className="table-dark">Título</th>
-                    <th className="table-dark">Autor</th>
-                    <th className="table-dark">Editorial</th>
-                    <th className="table-dark">Idioma</th>
-                    <th className="table-dark">N° de Copia</th>
-                    <th className="table-dark">Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {librosFiltrados.length === 0 ? (
+            {/* Contenedor con scroll */}
+            <div className="scroll-container">
+              {/* Tabla de libros */}
+              <div className="table-responsive">
+                <Table>
+                  <thead>
                     <tr>
-                      <td colSpan="6">
-                        No se encontraron libros disponibles.
-                      </td>
+                      <th className="table-dark">Título</th>
+                      <th className="table-dark">Autor</th>
+                      <th className="table-dark">Editorial</th>
+                      <th className="table-dark">Idioma</th>
+                      <th className="table-dark">N° de Copia</th>
+                      <th className="table-dark">Acción</th>
                     </tr>
-                  ) : (
-                    librosFiltrados.map((libro) => {
-                      const copiasPrestadas = libro.copias.filter(
-                        (copia) => copia.prestado === 1
-                      );
-                      return copiasPrestadas.length > 0
-                        ? copiasPrestadas.map((copia) => (
-                            <tr key={copia.copia_id}>
-                              <td>{libro.titulo}</td>
-                              <td>{libro.autor}</td>
-                              <td>
-                                {editoriales.find(
-                                  (editorial) =>
-                                    editorial.id === libro.id_editorial
-                                )?.nombre || "Desconocido"}
-                              </td>
-                              <td>
-                                {idiomas.find(
-                                  (idioma) => idioma.id === libro.id_idioma
-                                )?.idioma || "Desconocido"}
-                              </td>
-                              <td>{copia.copia_id}</td>
-                              <td>
-                                <Button
-                                  variant="danger"
-                                  onClick={() =>
-                                    handleDevolver(copia.copia_id)
-                                  }
-                                >
-                                  Devolver
-                                </Button>
-                              </td>
-                            </tr>
-                          ))
-                        : null;
-                    })
-                  )}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {librosFiltrados.length === 0 ? (
+                      <tr>
+                        <td colSpan="6">No se encontraron libros disponibles.</td>
+                      </tr>
+                    ) : (
+                      librosFiltrados.map((libro) => {
+                        const copiasPrestadas = libro.copias.filter(
+                          (copia) => copia.prestado === 1
+                        );
+                        return copiasPrestadas.length > 0
+                          ? copiasPrestadas.map((copia) => (
+                              <tr key={copia.copia_id}>
+                                <td>{libro.titulo}</td>
+                                <td>{libro.autor}</td>
+                                <td>
+                                  {editoriales.find(
+                                    (editorial) =>
+                                      editorial.id === libro.id_editorial
+                                  )?.nombre || "Desconocido"}
+                                </td>
+                                <td>
+                                  {idiomas.find(
+                                    (idioma) => idioma.id === libro.id_idioma
+                                  )?.idioma || "Desconocido"}
+                                </td>
+                                <td>{copia.copia_id}</td>
+                                <td>
+                                  <Button
+                                    variant="danger"
+                                    onClick={() =>
+                                      handleDevolver(copia.copia_id)
+                                    }
+                                  >
+                                    Devolver
+                                  </Button>
+                                </td>
+                              </tr>
+                            ))
+                          : null;
+                      })
+                    )}
+                  </tbody>
+                </Table>
+              </div>
             </div>
 
             {/* Botón Volver */}
@@ -162,5 +161,3 @@ const Devolver = () => {
 };
 
 export default Devolver;
-
-
