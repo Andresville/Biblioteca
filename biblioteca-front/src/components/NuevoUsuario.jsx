@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 const NuevoUsuario = () => {
   const [formData, setFormData] = useState({
@@ -13,8 +14,6 @@ const NuevoUsuario = () => {
     direccion: "",
     telefono: "",
   });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,32 +23,48 @@ const NuevoUsuario = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess(false);
+    let errorMessage = "";
 
     // Validaciones específicas para los campos
     if (!formData.nombre.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)) {
-      return setError("El nombre solo puede contener letras.");
+      errorMessage = "El nombre solo puede contener letras.";
     }
 
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      return setError("El email no tiene un formato válido.");
+      errorMessage = "El email no tiene un formato válido.";
     }
 
     if (!formData.dni.match(/^\d+$/)) {
-      return setError("El DNI solo puede contener números.");
+      errorMessage = "El DNI solo puede contener números.";
     }
 
     if (!formData.telefono.match(/^\d+$/)) {
-      return setError("El teléfono solo puede contener números.");
+      errorMessage = "El teléfono solo puede contener números.";
+    }
+
+    if (errorMessage) {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: errorMessage,
+      });
     }
 
     try {
       await api.put("/usuario", formData);
-      setSuccess(true);
-      setTimeout(() => navigate("/"), 2000);
+      Swal.fire({
+        icon: 'success',
+        title: 'Usuario Creado',
+        text: 'El usuario ha sido creado exitosamente.',
+      }).then(() => {
+        navigate("/");
+      });
     } catch (err) {
-      setError("No se pudo crear el usuario. Intente nuevamente.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pudo crear el usuario. Intente nuevamente.',
+      });
     }
   };
 
@@ -57,19 +72,17 @@ const NuevoUsuario = () => {
     <div
       style={{
         maxHeight: '80vh',
-        overflowY: 'auto', 
+        overflowY: 'auto',
         scrollbarWidth: 'none',
-        msOverflowStyle: 'none', 
+        msOverflowStyle: 'none',
       }}
     >
-      <Container className="d-flex align-items-center justify-content-center" >
-        <Row className="w-100" >
+      <Container className="d-flex align-items-center justify-content-center">
+        <Row className="w-100">
           <Col md={8} className="mx-auto">
             <div className="text-center">
               <h2>Crear Nuevo Usuario</h2>
             </div>
-            {error && <Alert variant="danger">{error}</Alert>}
-            {success && <Alert variant="success">Usuario creado exitosamente. Redirigiendo...</Alert>}
             <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
               <Form.Group className="mb-3" controlId="formNombre">
                 <Form.Label>Nombre</Form.Label>
@@ -80,6 +93,7 @@ const NuevoUsuario = () => {
                   value={formData.nombre}
                   onChange={handleChange}
                   required
+                  aria-label="Nombre del usuario"
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formEmail">
@@ -91,6 +105,7 @@ const NuevoUsuario = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  aria-label="Correo electrónico del usuario"
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formPassword">
@@ -102,6 +117,7 @@ const NuevoUsuario = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
+                  aria-label="Contraseña del usuario"
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formRole">
@@ -112,6 +128,7 @@ const NuevoUsuario = () => {
                   value={formData.role}
                   onChange={handleChange}
                   required
+                  aria-label="Rol del usuario"
                 >
                   <option value="user">Usuario</option>
                   <option value="admin">Administrador</option>
@@ -126,6 +143,7 @@ const NuevoUsuario = () => {
                   value={formData.dni}
                   onChange={handleChange}
                   required
+                  aria-label="DNI del usuario"
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formDireccion">
@@ -137,6 +155,7 @@ const NuevoUsuario = () => {
                   value={formData.direccion}
                   onChange={handleChange}
                   required
+                  aria-label="Dirección del usuario"
                 />
               </Form.Group>
               <Form.Group className="mb-5" controlId="formTelefono">
@@ -148,17 +167,19 @@ const NuevoUsuario = () => {
                   value={formData.telefono}
                   onChange={handleChange}
                   required
+                  aria-label="Teléfono del usuario"
                 />
               </Form.Group>
-              <Button variant="primary" type="submit" className="mx-auto d-block" >
+              <Button variant="primary" type="submit" className="mx-auto d-block">
                 Crear Usuario
               </Button>
             </Form>
-            <div className="text-center ">
+            <div className="text-center">
               <Button
                 variant="link"
                 onClick={() => navigate('/')}
                 className="text-decoration-none text-light"
+                aria-label="Volver al inicio"
               >
                 Volver al inicio
               </Button>
