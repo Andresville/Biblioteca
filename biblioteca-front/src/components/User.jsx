@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Card, Form } from "react-bootstrap";
 import { useLibrary } from "../context/LibraryContext";
+import Swal from "sweetalert2"; // Importar SweetAlert
 
 const User = () => {
   const { libros, editoriales, idiomas } = useLibrary();
@@ -55,15 +56,27 @@ const User = () => {
     idiomas,
   ]);
 
+  // Función para manejar el cierre de sesión
+  const handleLogout = () => {
+    Swal.fire({
+      title: '¡Éxito!',
+      text: 'Usted ha cerrado la sesión correctamente',
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
+    }).then(() => {
+      navigate("/"); // Redirigir a la página principal después de la alerta
+    });
+  };
+
   return (
     <div
-    style={{
-      maxHeight: '80vh',
-      overflowY: 'auto', 
-      scrollbarWidth: 'none',
-      msOverflowStyle: 'none', 
-    }}
->
+      style={{
+        maxHeight: '80vh',
+        overflowY: 'auto', 
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none', 
+      }}
+    >
       <Container className="text-center">
         <Row className="w-100">
           <Col md={12} className="mx-auto">
@@ -178,7 +191,7 @@ const User = () => {
             <div className="text-center mt-4">
               <Button
                 variant="link"
-                onClick={() => navigate("/")}
+                onClick={handleLogout} // Llamar a la función de cierre de sesión
                 className="text-decoration-none fw-bold text-light"
               >
                 Cerrar Sesión
