@@ -57,6 +57,12 @@ const User = () => {
 
   return (
     <div
+    style={{
+      maxHeight: '80vh',
+      overflowY: 'auto', 
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none', 
+    }}
 >
       <Container className="text-center">
         <Row className="w-100">

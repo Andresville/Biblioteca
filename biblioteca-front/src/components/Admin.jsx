@@ -51,14 +51,6 @@ const Admin = () => {
     searchTitle || searchAutor || searchEditorial || searchIdioma;
 
     return (
-      <div
-        style={{
-          maxHeight: '80vh',
-          overflowY: 'auto',  // Habilita el scroll
-          scrollbarWidth: 'none', // Oculta el scroll en navegadores que soportan esta propiedad
-          msOverflowStyle: 'none', // Oculta el scroll en IE
-        }}
-      >
         <Container fluid className="text-center">
           <Row>
             <Col>
@@ -105,7 +97,7 @@ const Admin = () => {
     
               {/* Tabla de Libros */}
               {isSearchActive && (
-                <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+                <div style={{ maxHeight: "400px", overflowY: "auto", scrollbarWidth: 'none',}}>
                   <Table>
                     <thead>
                       <tr>
@@ -192,7 +184,6 @@ const Admin = () => {
             </Col>
           </Row>
         </Container>
-      </div>
     );    
 };
 
