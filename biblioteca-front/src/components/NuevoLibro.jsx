@@ -33,7 +33,6 @@ const NuevoLibro = () => {
       editorial: parseInt(formData.editorial, 10),
       idioma: parseInt(formData.idioma, 10),
       cantidad: parseInt(formData.cantidad, 10),
-      ruta_imagen: formData.ruta_imagen,
     };
 
     try {
@@ -46,6 +45,21 @@ const NuevoLibro = () => {
       setError("No se pudo cargar el nuevo libro. Intente nuevamente.");
     }
   };
+
+  // Desaparecer la alerta después de 3 segundos
+  const hideAlert = (type) => {
+    setTimeout(() => {
+      if (type === 'success') {
+        setSuccess(false);
+      } else {
+        setError("");
+      }
+    }, 3000);
+  };
+
+  // Mostrar alertas
+  if (error) hideAlert('error');
+  if (success) hideAlert('success');
 
   return (
     <div
@@ -62,13 +76,17 @@ const NuevoLibro = () => {
       <Container className="d-flex align-items-center justify-content-center">
         <Row className="w-100">
           <Col md={9} className="mx-auto">
+            {/* Colocamos las alertas dentro del contenedor pero fuera del formulario */}
+            <div>
+              {error && <Alert variant="danger">{error}</Alert>}
+              {success && (
+                <Alert variant="success">
+                  Libro registrado exitosamente. Redirigiendo...
+                </Alert>
+              )}
+            </div>
+
             <h2 className="text-center pb-3 pt-3">Nuevo Libro</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            {success && (
-              <Alert variant="success">
-                Libro registrado exitosamente. Redirigiendo...
-              </Alert>
-            )}
             <Form onSubmit={handleSubmit} className="shadow p-4 rounded">
               <Form.Group className="mb-3" controlId="formTitulo">
                 <Form.Label>Titulo</Form.Label>
@@ -99,17 +117,6 @@ const NuevoLibro = () => {
                   placeholder="Ingresa el ISBN"
                   name="ISBN"
                   value={formData.ISBN}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formImg">
-                <Form.Label>Ruta Imagen</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="/static/Img/Nombre_Imagen.jpg"
-                  name="ruta_imagen"
-                  value={formData.ruta_imagen}
                   onChange={handleChange}
                   required
                 />
